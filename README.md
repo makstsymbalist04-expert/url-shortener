@@ -1,6 +1,6 @@
 # URL Shortener
 
- FastAPI + async SQLAlchemy + PostgreSQL + Pydantic + Alembic.
+FastAPI + async SQLAlchemy + PostgreSQL + Pydantic + Alembic.
 OAuth2 Authorization Code flow с обязательным PKCE S256; пароли — Argon2id.
 
 ## Быстрый запуск
@@ -11,10 +11,8 @@ OAuth2 Authorization Code flow с обязательным PKCE S256; парол
 docker compose up --build
 ```
 
-Открыть http://localhost:8000/docs 
+Открыть http://localhost:8000/docs
 Миграции применяются автоматически при старте контейнера API.
-
-
 
 `expires_at` передаётся с часовым поясом: `2027-01-01T00:00:00Z`.
 `expires_at` и `max_clicks` можно не указывать или передать null.
@@ -81,7 +79,7 @@ docker compose exec db psql -U shortener -d shortener -c "UPDATE users SET role=
 Хэширование вынесено в threadpool, чтобы не блокировать async event loop.
 
 Для публикации за пределами локальной машины нужны HTTPS, `SECURE_COOKIES=true`,
-точный HTTPS callback и отдельные секреты PostgreSQL. 
+точный HTTPS callback и отдельные секреты PostgreSQL.
 ## Тесты (на настоящем PostgreSQL)
 
 Создать отдельную БД — тесты пересоздают таблицы только в ней:
@@ -118,8 +116,3 @@ TEST_DATABASE_URL=postgresql+asyncpg://shortener:shortener@localhost:5432/shorte
 - `app/main.py` — API ссылок и зависимость own_link.
 - `alembic/versions/0001_initial.py` — начальная миграция.
 - `tests/test_api.py` — интеграционные тесты PostgreSQL.
-
-
-```
-
-
